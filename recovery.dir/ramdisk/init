@@ -1,0 +1,31 @@
+#!/bin/sh
+mkdir /proc
+mkdir /tmp
+mkdir /sys
+mkdir /root
+mount -t proc none /proc
+mount -t sysfs none /sys
+insmod /ko/ath6kl_usb.ko
+insmod /ko/cfg80211_ath6k.ko
+#insmod /ko/hi_vfmw_avsp.bin
+insmod /ko/tntfs_hisilicon.ko
+insmod /ko/bcmdhd.ko
+insmod /ko/cfg80211.ko
+#insmod /ko/hi_vfmw_h264.bin
+insmod /ko/xhci-hcd.ko
+insmod /ko/btusb.ko
+insmod /ko/ehci-hcd.ko
+insmod /ko/ohci-hcd.ko
+insmod /ko/rtl8188eu.ko
+mount -t devtmpfs devtmpfs /dev
+echo -e "Waiting 5 seconds for removable devices to stablize"
+i=0
+while [ $i -lt 5 ]; do
+ sleep 1
+ echo -n "."
+ i=$(($i+1))
+done
+echo
+#blkid | grep 72bd0c84-8342-412a-9c69-b33a3d7181e7 > /mountdev
+mount /dev/mmcblk0p17 /root
+exec switch_root -c /dev/console /root /sbin/init
