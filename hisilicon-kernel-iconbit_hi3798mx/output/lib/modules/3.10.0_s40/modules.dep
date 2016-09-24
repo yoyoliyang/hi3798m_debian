@@ -1,0 +1,80 @@
+kernel/fs/quota/quota_v1.ko:
+kernel/fs/quota/quota_v2.ko: kernel/fs/quota/quota_tree.ko
+kernel/fs/quota/quota_tree.ko:
+kernel/fs/nfs/nfs_layout_nfsv41_files.ko:
+kernel/fs/nls/nls_cp737.ko:
+kernel/fs/nls/nls_cp775.ko:
+kernel/fs/nls/nls_cp850.ko:
+kernel/fs/nls/nls_cp852.ko:
+kernel/fs/nls/nls_cp855.ko:
+kernel/fs/nls/nls_cp857.ko:
+kernel/fs/nls/nls_cp860.ko:
+kernel/fs/nls/nls_cp861.ko:
+kernel/fs/nls/nls_cp862.ko:
+kernel/fs/nls/nls_cp863.ko:
+kernel/fs/nls/nls_cp864.ko:
+kernel/fs/nls/nls_cp865.ko:
+kernel/fs/nls/nls_cp866.ko:
+kernel/fs/nls/nls_cp869.ko:
+kernel/fs/nls/nls_cp874.ko:
+kernel/fs/nls/nls_cp932.ko:
+kernel/fs/nls/nls_euc-jp.ko:
+kernel/fs/nls/nls_cp949.ko:
+kernel/fs/nls/nls_cp950.ko:
+kernel/fs/nls/nls_cp1250.ko:
+kernel/fs/nls/nls_cp1251.ko:
+kernel/fs/nls/nls_iso8859-2.ko:
+kernel/fs/nls/nls_iso8859-3.ko:
+kernel/fs/nls/nls_iso8859-4.ko:
+kernel/fs/nls/nls_iso8859-5.ko:
+kernel/fs/nls/nls_iso8859-6.ko:
+kernel/fs/nls/nls_iso8859-7.ko:
+kernel/fs/nls/nls_cp1255.ko:
+kernel/fs/nls/nls_iso8859-9.ko:
+kernel/fs/nls/nls_iso8859-13.ko:
+kernel/fs/nls/nls_iso8859-14.ko:
+kernel/fs/nls/nls_iso8859-15.ko:
+kernel/fs/nls/nls_koi8-r.ko:
+kernel/fs/nls/nls_koi8-u.ko:
+kernel/fs/nls/nls_koi8-ru.ko:
+kernel/fs/reiserfs/reiserfs.ko:
+kernel/fs/autofs4/autofs4.ko:
+kernel/fs/jfs/jfs.ko:
+kernel/fs/xfs/xfs.ko: kernel/lib/libcrc32c.ko
+kernel/drivers/net/wireless/zd1201.ko:
+kernel/drivers/net/wireless/ath/ath9k/ath9k.ko: kernel/drivers/net/wireless/ath/ath9k/ath9k_common.ko kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko kernel/drivers/net/wireless/ath/ath.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko
+kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko: kernel/drivers/net/wireless/ath/ath.ko kernel/net/wireless/cfg80211.ko
+kernel/drivers/net/wireless/ath/ath9k/ath9k_common.ko: kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko kernel/drivers/net/wireless/ath/ath.ko kernel/net/wireless/cfg80211.ko
+kernel/drivers/net/wireless/ath/ath9k/ath9k_htc.ko: kernel/drivers/net/wireless/ath/ath9k/ath9k_common.ko kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko kernel/drivers/net/wireless/ath/ath.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko
+kernel/drivers/net/wireless/ath/ath.ko: kernel/net/wireless/cfg80211.ko
+kernel/drivers/usb/host/ehci-hcd.ko:
+kernel/drivers/usb/host/ohci-hcd.ko:
+kernel/drivers/usb/host/xhci-hcd.ko:
+kernel/net/802/p8022.ko: kernel/net/llc/llc.ko
+kernel/net/802/psnap.ko: kernel/net/llc/llc.ko
+kernel/net/802/stp.ko: kernel/net/llc/llc.ko
+kernel/net/netfilter/xt_HL.ko:
+kernel/net/netfilter/xt_ecn.ko:
+kernel/net/netfilter/xt_hl.ko:
+kernel/net/ipv4/netfilter/ip_tables.ko:
+kernel/net/ipv4/netfilter/iptable_filter.ko: kernel/net/ipv4/netfilter/ip_tables.ko
+kernel/net/ipv4/netfilter/iptable_mangle.ko: kernel/net/ipv4/netfilter/ip_tables.ko
+kernel/net/ipv4/netfilter/iptable_raw.ko: kernel/net/ipv4/netfilter/ip_tables.ko
+kernel/net/ipv4/netfilter/ipt_ah.ko:
+kernel/net/ipv4/netfilter/ipt_ECN.ko:
+kernel/net/ipv4/netfilter/ipt_REJECT.ko:
+kernel/net/ipv4/netfilter/ipt_ULOG.ko:
+kernel/net/ipv4/netfilter/arp_tables.ko:
+kernel/net/ipv4/netfilter/arpt_mangle.ko:
+kernel/net/ipv4/netfilter/arptable_filter.ko: kernel/net/ipv4/netfilter/arp_tables.ko
+kernel/net/ipv4/ip_tunnel.ko:
+kernel/net/ipv4/tunnel4.ko:
+kernel/net/ipv6/xfrm6_mode_transport.ko:
+kernel/net/ipv6/xfrm6_mode_tunnel.ko:
+kernel/net/ipv6/xfrm6_mode_beet.ko:
+kernel/net/ipv6/sit.ko: kernel/net/ipv4/ip_tunnel.ko kernel/net/ipv4/tunnel4.ko
+kernel/net/wireless/cfg80211.ko:
+kernel/net/llc/llc.ko:
+kernel/net/bridge/bridge.ko: kernel/net/802/stp.ko kernel/net/llc/llc.ko
+kernel/net/mac80211/mac80211.ko: kernel/net/wireless/cfg80211.ko
+kernel/lib/libcrc32c.ko:

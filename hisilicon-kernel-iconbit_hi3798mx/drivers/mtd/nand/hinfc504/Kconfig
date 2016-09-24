@@ -1,0 +1,101 @@
+#
+# drivers/mtd/nand/hinfc504/Kconfig
+# add by caizhiyong 2010.11.04
+#
+
+menuconfig MTD_NAND_HINFC504
+	tristate "Hisilicon NAND Controller v504 device Support"
+	depends on MTD_NAND
+	default y if (ARCH_S40) || (ARCH_GODBOX)
+	select YAFFS_FS
+	select MISC_FILESYSTEMS
+	select MTD_BLOCK
+	select YAFFS_YAFFS2
+	help
+	  Hisilicon NAND Controller v504 device Support
+
+if MTD_NAND_HINFC504
+
+config HINFC504_REG_BASE_ADDRESS
+	hex "nand controller's register base address"
+	default 0xF9810000 if (ARCH_S40)
+	default 0x60010000 if (ARCH_GODBOX)
+	help
+	  register base address of nand controller
+
+config HINFC504_BUFFER_BASE_ADDRESS
+	hex "nand controller's buffer base address"
+	default 0xFE000000 if (ARCH_S40)
+	default 0x24000000 if (ARCH_GODBOX)
+	help
+	  buffer base address of nand controller
+
+config HINFC504_PERIPHERY_REGBASE
+	hex "nand controller's peripher base address"
+	default 0xF8A22000 if (ARCH_S40)
+	default 0x101F5000 if (ARCH_GODBOX)
+	help
+	  peripher base address of nand controller,for clk setting
+
+config HINFC504_MAX_CHIP
+	int "number of nand flash chip (1,4)"
+	default 1
+	help
+	  nand controller v504 device only support 1 or 2 nand flash chip,
+	  your should not config other value.
+
+config HINFC504_DBG_NAND_DEBUG
+	bool "Debug: create debug file to control debug type"
+	default y
+	help
+	  Create "debug" file to control debug type.
+
+config HINFC504_DBG_NAND_DUMP
+	bool "Debug: display read/write/erase process nand data"
+	depends on HINFC504_DBG_NAND_DEBUG
+	default y
+	help
+	  Create "dump" file dump to display all nand operation and data.
+
+config HINFC504_DBG_NAND_ERASE_COUNT
+	bool "Debug: display last erase count"
+	depends on HINFC504_DBG_NAND_DEBUG
+	default y
+	help
+	  Create "erase_count" file to display last erase count.
+
+config HINFC504_DBG_NAND_ECC_COUNT
+	bool "Debug: display last ecc count."
+	depends on HINFC504_DBG_NAND_DEBUG
+	default y
+	help
+	  Create "ecc_count" to display last ecc count.
+
+config HINFC504_DBG_NAND_READ_RETRY
+	bool "Debug: display read_retry process"
+	depends on HINFC504_DBG_NAND_DEBUG
+	default y
+	help
+	  Create read_retry file to display read_retry process.
+
+choice
+	prompt "Pagesize and Ecc Type Select"
+
+config HINFC504_HARDWARE_PAGESIZE_ECC
+	bool "Hardware"
+	help
+	  pagesize and ecc type use hardware config
+
+config HINFC504_AUTO_PAGESIZE_ECC
+	bool "Auto"
+	help
+	  pagesize and ecc type use hardware config
+
+config HINFC504_PAGESIZE_AUTO_ECC_NONE
+	bool "Pagesize Auto, Ecc None"
+	help
+	  select pagesize 2K, ecc none.
+
+endchoice
+
+endif # MTD_NAND_HINFC504

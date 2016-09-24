@@ -1,0 +1,38 @@
+#
+# hisilicon usb2 device controller version 3.00a
+#
+
+menuconfig HI_HS_DEVICE
+	tristate "hisilicon highspeed device controller version 3.00a driver"
+	default n
+	select USB_GADGET_DUALSPEED
+	select USB_GADGET_SELECTED
+	help
+	  hisilicon highspeed device controller version 3.00a.
+
+if HI_HS_DEVICE
+
+config HIUSBUDC_REG_BASE_ADDRESS
+	hex "hisilicon highspeed device control register base address"
+	default "0xf98c0000" if (ARCH_S40 || ARCH_HI3798MX)
+	default "0x60180000" if ARCH_GODBOX
+
+config HIUSBUDC_REG_BASE_ADDRESS_LEN
+	hex "hisilicon highspeed device control register size length"
+	default "0x40000" if (ARCH_S40 || ARCH_HI3798MX)
+	default "0x40000" if ARCH_GODBOX
+
+config HIUSBUDC_IRQ_NUMBER
+	int "hisilicon highspeed device interrupt number"
+	default "100" if (ARCH_S40 || ARCH_HI3798MX)
+	default "103" if ARCH_GODBOX
+	
+config HIUSBUDC_DMA_BUF_LENGTH
+	int "hisilicon highspeed device dma buffer length"
+	default "512" if (ARCH_S40 || ARCH_HI3798MX)
+	default "16384" if ARCH_GODBOX
+config HIUSBUDC_PHY_UTMI_BITWIDTH
+	int "hisilicon highspeed device phy interface utmi bitwidth"
+	default "8" 
+endif # HI_HS_DEVICE
+

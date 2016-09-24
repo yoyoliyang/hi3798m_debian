@@ -1,0 +1,43 @@
+#
+# himci v200 device configuration
+#
+
+menuconfig HIMCIV200_SDIO_SYNOPSYS 
+	tristate "himci v200 sdio/mmc device support"
+	depends on (ARCH_GODBOX || ARCH_S40 || ARCH_HI3798MX)
+	default n if (ARCH_GODBOX || ARCH_S40 || ARCH_HI3798MX)
+	select MMC_UNSAFE_RESUME
+	select MMC_EMBEDDED_SDIO
+	select MMC_BLOCK
+	select MMC_BLOCK_BOUNCE
+	help
+	  This selects the mmc family device.
+
+if HIMCIV200_SDIO_SYNOPSYS 
+
+config HIMCIV200_SDIO0_IOBASE
+	hex "himci v200 sdio0 reg base"
+	default "0x601C0000" if ARCH_GODBOX
+	default "0xF9820000" if (ARCH_S40 || ARCH_HI3798MX)
+
+
+config HIMCIV200_SDIO0_INTR
+	int "himci v200 sdio0 intr number"
+	default "98" if ARCH_GODBOX
+	default "66" if (ARCH_S40 || ARCH_HI3798MX)
+
+config HIMCIV200_SDIO0_BUS_WIDTH_8
+	bool "himci v200 sdio0 bus_width_8_bit support"
+	depends on ARCH_GODBOX
+	default n if ARCH_GODBOX
+	
+config HIMCIV200_SDIO1_IOBASE
+	hex "himci v200 sdio1 reg base"
+	default "0xF9830000" if (ARCH_S40 || ARCH_HI3798MX)
+
+config HIMCIV200_SDIO1_INTR
+	int "himci v200 sdio1 intr number"
+	default "67" if (ARCH_S40 || ARCH_HI3798MX)
+
+endif
+

@@ -1,0 +1,133 @@
+#
+# higmac family network device configuration
+#
+
+menuconfig HIETH_GMAC
+	tristate "hieth gmac family network device support"
+	depends on (ARCH_S40 || ARCH_HI3516A)
+	default y
+	help
+	  This selects the hieth gmac family network device.
+
+if HIETH_GMAC
+
+config GMAC_NUMS
+	int "hieth-gmac gmac nums"
+	range 1 2
+	default "2"  if (ARCH_S40)
+	default "1"  if (ARCH_HI3516A)
+	---help---
+	 hieth-gmac gmac nums.
+	 1: mac0,
+	 2: mac0 and mac1.
+
+config HIETH_TAG
+	hex "hieth-gmac misc tag"
+	default "0x544100ff"
+	help
+	  This is graceful set phy interface/mdio/phyaddr in kernel.
+
+config ETHADDR_TAG
+	hex "hieth-gmac mac address tag"
+	default "0x726d6d73"
+	help
+	  This is graceful set mac address in kernel.
+
+config HIGMAC_IOBASE
+	hex "hieth-gmac IO address"
+	default "0xf9840000" if ARCH_S40
+
+
+config HIGMAC_IRQNUM
+	int "hieth-gmac irq number"
+	default "103" if ARCH_S40
+
+config HIGMAC_PHY0_ADDR
+	int "hieth-gmac0 phy addr"
+	range 1 31
+	default "1"
+	help
+	  mac0's phy addr.
+
+config HIGMAC_PHY1_ADDR
+	int "hieth-gmac1 phy addr"
+	range 1 31
+	default "2"
+	help
+	  mac1's phy addr.
+
+config HIGMAC_PHY0_INTERFACE_MODE
+	int "hieth-gmac phy0 interface mode"
+	range 0 11
+	default "1"
+	 help
+	  hieth-gmac phy0 interface mode.
+	  1---MII,
+	  5---RMII,
+	  6---RGMII.
+
+config HIGMAC_PHY1_INTERFACE_MODE
+	int "hieth-gmac phy1 interface mode"
+	range 0 11
+	default "1"
+	help
+	  hieth-gmac phy1 interface mode.
+	  1---MII,
+	  5---RMII,
+	  6---RGMII.
+
+config MAC0_PHY_GPIO_RESET
+	bool "use gpio to reset mac0's phy"
+	default n
+	help
+	  use gpio to reset mac0's phy.
+
+config MAC0_PHY_RESET_GPIO_BASE
+	hex "gpio base address"
+	depends on MAC0_PHY_GPIO_RESET
+	default "0xF8B22000"
+
+config MAC0_PHY_RESET_GPIO_BIT
+	int "gpio bit"
+	depends on MAC0_PHY_GPIO_RESET
+	range 0 7
+	default "5"
+
+config MAC0_PHY_RESET_GPIO_DATA
+	int "gpio data"
+	depends on MAC0_PHY_GPIO_RESET
+	range 0 1
+	default "1"
+	help
+	  to control gpio ouput signal.
+	  1 means gpio output 1--0--1
+	  0 means gpio output 0--1--0
+
+config MAC1_PHY_GPIO_RESET
+	bool "use gpio to reset mac1's phy"
+	default n
+	help
+	  use gpio to reset mac1's phy.
+
+config MAC1_PHY_RESET_GPIO_BASE
+	hex "gpio base address"
+	depends on MAC1_PHY_GPIO_RESET
+	default "0xF8B22000"
+
+config MAC1_PHY_RESET_GPIO_BIT
+	int "gpio bit"
+	depends on MAC1_PHY_GPIO_RESET
+	range 0 7
+	default "5"
+
+config MAC1_PHY_RESET_GPIO_DATA
+	int "gpio data"
+	depends on MAC1_PHY_GPIO_RESET
+	range 0 1
+	default "1"
+	help
+	  to control gpio ouput signal.
+	  1 means gpio output 1--0--1
+	  0 means gpio output 0--1--0
+
+endif # HIETH_GMAC

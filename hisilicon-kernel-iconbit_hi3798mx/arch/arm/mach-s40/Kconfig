@@ -1,0 +1,128 @@
+menu "S40 board feature"
+
+config MACH_S40
+	bool "Support s40 platform"
+	select CPU_V7
+	select ARM_GIC
+	select ARM_TIMER_SP804
+	help
+	  Include support for the hisilion S40 platform.
+	  S40 support ARM CORTEX-A9 processer,
+	  within a Generic Interrupt Controller.
+	  Support DDR2 and DDR3.
+
+choice
+	prompt "CPU timer source"
+	default HAVE_SP804_LOCAL_TIMER
+
+config HAVE_SP804_LOCAL_TIMER
+	bool "arm local timer from sp804"
+	help
+	  arm local timer from sp804.
+
+config HAVE_ARM_LOCAL_TIMER
+	bool "arm local timer from arm self"
+	help
+	  arm local timer from arm self.
+endchoice
+
+config HI_S40_HZ
+	int "Config HZ"
+	default 100 if HIGH_RES_TIMERS
+	default 100
+
+config DEFAULT_BUSCLK
+	int "DEFAULT_BUSCLK"
+	default "50000000"
+	help
+	  Default AHB clock rate
+
+config DEFAULT_UART_BASE_ADDR
+	hex "Default uart controller base address"
+	default "0xF8B00000"
+	help
+	  Default UART controller base address
+
+config MMZ_PARAM
+	string "MMZ param for CMA and ION"
+	depends on CMA
+	default "ddr,0,0,320M" if MACH_S40
+	help
+	  This is the parameter of mmz memory manager, which now is for CMA 
+	  and ION memory manager.
+
+	  
+config S40_FPGA
+	bool "Enable S40 Fpga config"
+	default y if ARCH_S40
+
+menuconfig SUPPORT_CA
+	bool "Support CA"
+	default n
+	help
+	  If support ca, user privileges will be limit.
+	  select y, support ca, otherwise not support ca.
+
+config CA_RUNTIME_CHECK
+	bool "Support CA runtime check"
+	depends on SUPPORT_CA
+	default n
+	help
+	  support ca runtime check feature
+
+config CA_WARKUP_CHECK
+	bool "Support CA wakeup ddr check"
+	depends on SUPPORT_CA
+	default n
+	help
+	  support ca suspend get hash value, and wakeup check ddr.
+
+config CA_SUPPORT_ADVCA
+	bool "Support advca"
+	depends on SUPPORT_CA
+	default n
+	help
+	  support advca, which is the real CA.
+
+menuconfig SUPPORT_DSP_RUN_MEM
+	bool "Support DSP run memory"
+	default y
+	help 
+	  Support DSP run memory
+
+config DSP_RUN_MEM_ADDR
+	hex "DSP run memory address"
+	depends on SUPPORT_DSP_RUN_MEM
+	default "0x2000000" 
+	help
+	  The start address of DSP run memory.
+
+config DSP_RUN_MEM_SIZE
+	hex "DSP run memory size"
+	depends on SUPPORT_DSP_RUN_MEM
+	default "0x800000"
+	help
+	  The size of DSP run memory.
+
+menuconfig SUPPORT_SRAM_MANAGER
+	bool "SRAM manager suppport"
+	default n
+	select GENERIC_ALLOCATOR
+	help
+	  If say y, SRAM manager is supported
+
+config SRAM_PHYS_START
+	hex "SRAM physical address"
+	default "0xFFFF2800"
+	depends on SUPPORT_SRAM_MANAGER
+	help
+	  SRAM physical address
+
+config SRAM_PHYS_SIZE
+	hex "SRAM size"
+	default "0x00002800"
+	depends on SUPPORT_SRAM_MANAGER
+	help
+	  SRAM size
+
+endmenu

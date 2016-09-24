@@ -1,0 +1,119 @@
+#
+# hiusb Host Controller Drivers
+#
+comment "hiusb Host Controller Drivers"
+	depends on USB
+
+menuconfig HIUSB_HOST
+	bool "hiusb(xhci/ehci/ohci) family usb host device support"
+	default y 
+	help
+	  This selects the usb(xhci/ehci/ohci) family usb host device.
+
+if HIUSB_HOST
+
+config HIUSB_XHCI
+	bool "hiusb-xhci usb host device support"
+	default y 
+
+config HIUSB_XHCI_IOBASE
+	hex "hiusb-xhci IO address"
+	default "0xf9870000"
+
+config HIUSB_XHCI_IOSIZE
+	hex "hiusb-xhci IO size"
+	default "0x00010000"
+	help
+	  default is 0x10000.
+
+config HIUSB_XHCI_IRQNUM
+	int "hiusb-xhci irq number"
+	default "101" 
+
+config HIUSB_EHCI
+	bool "hiusb-ehci usb host device support"
+	default y 
+
+config HIUSB_EHCI_IOBASE
+	hex "hiusb-ehci IO address"
+	default "0xf9890000" 
+
+config HIUSB_EHCI_IOSIZE
+	hex "hiusb-ehci IO size"
+	default "0x00010000"
+	help
+	  default is 0x10000.
+
+config HIUSB_EHCI_IRQNUM
+	int "hiusb-ehci irq number"
+	default "98" 
+	
+config HIUSB_EHCI1_IOBASE
+	hex "hiusb-ehci1 IO address"
+	depends on (ARCH_HI3798MX)
+	default "0xf9930000" 
+
+config HIUSB_EHCI1_IOSIZE
+	hex "hiusb-ehci1 IO size"
+	depends on (ARCH_HI3798MX)
+	default "0x00010000"
+	help
+	  default is 0x10000.
+
+config HIUSB_EHCI1_IRQNUM
+	int "hiusb-ehci1 irq number"
+	depends on (ARCH_HI3798MX)
+	default "94" 
+
+config HIUSB_OHCI
+	bool "hiusb-ohci usb host device support"
+	default y 
+
+config HIUSB_OHCI_IOBASE
+	hex "hiusb-ohci IO address"
+	default "0xf9880000" 
+
+config HIUSB_OHCI_IOSIZE
+	hex "hiusb-ohci IO size"
+	default "0x00010000"
+	help
+	  default is 0x10000.
+
+config HIUSB_OHCI_IRQNUM
+	int "hiusb-ohci irq number"
+	default "99" 
+	
+config HIUSB_OHCI1_IOBASE
+	hex "hiusb-ohci1 IO address"
+	depends on (ARCH_HI3798MX)
+	default "0xf9920000" 
+
+config HIUSB_OHCI1_IOSIZE
+	hex "hiusb-ohci1 IO size"
+	depends on (ARCH_HI3798MX)
+	default "0x00010000"
+	help
+	  default is 0x10000.
+
+config HIUSB_OHCI1_IRQNUM
+	int "hiusb-ohci1 irq number"
+	depends on (ARCH_HI3798MX)
+	default "95" 
+
+config HIUSB_OTG
+	tristate "hiusb USB2.0 host/device otg support"
+	select HI_HS_DEVICE
+	help
+	  This driver enables PORT0 with otg function.
+
+if HIUSB_OTG
+config HIUSB_OTG_SWITCH_TIME
+	int "host/device detection interval(ms)"
+	default "1000" 
+	help
+	  host/device detection interval
+
+endif # HIUSB_OTG
+
+endif # HIUSB_HOST
+

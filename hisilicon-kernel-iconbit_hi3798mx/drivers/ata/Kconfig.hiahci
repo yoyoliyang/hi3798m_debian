@@ -1,0 +1,58 @@
+#
+# hisata sata ahci device configuration
+#
+
+menuconfig HI_SATA
+	bool "hisilicon sata device support"
+	depends on (ARCH_GODBOX || ARCH_S40 || ARCH_HI3798MX)
+	default n if (ARCH_GODBOX  || ARCH_S40 || ARCH_HI3798MX)
+	select ATA
+	select ATA_VERBOSE_ERROR
+	select SATA_PMP
+	help
+	  This selects the hisilicon sata device.
+
+if HI_SATA
+
+config HI_SATA_IOBASE
+	hex "hi sata IO address"
+	default "0x60040000" if ARCH_GODBOX
+	default "0xF9900000" if (ARCH_S40 || ARCH_HI3798MX)
+
+config HI_SATA_IOSIZE
+	hex "hi sata IO size"
+	default "0x00010000"
+	help
+	  default is 0x10000.
+
+config HI_SATA_IRQNUM
+	int "hi sata irq number"
+	default "92" if ARCH_GODBOX
+	default "102" if (ARCH_S40 || ARCH_HI3798MX)
+
+config HI_SATA_PHY_CONFIG
+	hex "hi sata phy config for 1.5G"
+	default "0x0e03615f" if ARCH_GODBOX
+	depends on ARCH_GODBOX
+	help
+	   SATA Phy config for 1.5G mode.
+
+config HI_SATA_3G_PHY_CONFIG
+	hex "hi sata phy config for 3G"
+	default "0x0e662753" if ARCH_GODBOX
+	depends on ARCH_GODBOX
+	help
+	   SATA Phy config for 3G mode.
+
+config HI_SATA_MODE
+	int "hi sata interworking speed mode(1.5G:0/3G:1)"
+	range 0 1
+	default "0" if ARCH_GODBOX
+	depends on ARCH_GODBOX
+
+config HI_SATA_PORTS
+	int "hi sata port number"
+	default "1" if ARCH_GODBOX
+	depends on ARCH_GODBOX
+
+endif # HI_SATA

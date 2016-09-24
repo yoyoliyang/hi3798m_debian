@@ -1,0 +1,42 @@
+#
+# hisilicon spi flash controller device version 350
+#
+
+menuconfig MTD_HISFC350
+	tristate "hisilicon spi flash controller device version 350 driver"
+	depends on ARCH_S40 || ARCH_GODBOX
+	default n
+	select MTD_SPI_IDS
+	help
+	  hisilicon spi flash controller device version 350.
+
+if MTD_HISFC350
+
+config HISFC350_SYSCTRL_ADDRESS
+	hex "hisfc350 system control register base address"
+	default "0xf8a22000" if ARCH_S40
+	default "0x101f5000" if ARCH_GODBOX
+
+config HISFC350_BUFFER_BASE_ADDRESS
+	hex "hisfc350 read/write memory base address"
+	default "0xfa000000" if ARCH_S40
+	default "0x26000000" if ARCH_GODBOX
+
+config HISFC350_REG_BASE_ADDRESS
+	hex "hisfc350 register base address"
+	default "0xf9800000" if ARCH_S40
+	default "0x60020000" if ARCH_GODBOX
+
+config HISFC350_CHIP_NUM
+	int "hisfc350 spi chip number"
+	default 2 if ARCH_S40
+	default 2 if ARCH_GODBOX
+
+config HISFC350_SHOW_CYCLE_TIMING
+	bool "show spi read/write/erase timing cycle"
+	default n
+	help
+	  Show spi read/write/erase timing cycle, command, clock.
+
+endif # MTD_HISFC350
+

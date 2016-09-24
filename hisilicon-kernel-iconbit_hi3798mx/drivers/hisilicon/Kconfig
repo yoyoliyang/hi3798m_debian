@@ -1,0 +1,9 @@
+menu "Hisilicon driver support"
+
+config APP_CAPABLE
+	tristate "Application Capable"
+	default y
+	help
+	  Support application have root authority.
+
+endmenu
