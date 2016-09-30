@@ -1,0 +1,31 @@
+#!/bin/sh
+mkdir /proc
+mkdir /tmp
+mkdir /sys
+mkdir /root
+mount -t proc none /proc
+mount -t sysfs none /sys
+insmod /ko/ath6kl_usb.ko
+insmod /ko/cfg80211_ath6k.ko
+#insmod /ko/hi_vfmw_avsp.bin
+insmod /ko/tntfs_hisilicon.ko
+insmod /ko/bcmdhd.ko
+insmod /ko/cfg80211.ko
+#insmod /ko/hi_vfmw_h264.bin
+insmod /ko/xhci-hcd.ko
+insmod /ko/btusb.ko
+insmod /ko/ehci-hcd.ko
+insmod /ko/ohci-hcd.ko
+mount -t devtmpfs devtmpfs /dev
+IP=$(cat /proc/cmdline | tr " " '\n' |sed -n '/ip/p' | cut -d '=' -f 2)
+NETMASK=$(cat /proc/cmdline | tr " " '\n' |sed -n '/netmask/p' | cut -d '=' -f 2)
+GATEWAY=$(cat /proc/cmdline | tr " " '\n' |sed -n '/gateway/p' | cut -d '=' -f 2)
+NFSSERVER=$(cat /proc/cmdline | tr " " '\n' |sed -n '/nfsserver/p' | cut -d '=' -f 2)
+NFSPATH=$(cat /proc/cmdline | tr " " '\n' |sed -n '/nfspath/p' | cut -d '=' -f 2)
+ETH=$(ls /sys/class/net/ | grep eth)
+echo -e "\033[41;37m ip:$IP,netmask:$NETMASK,gateway:$GATEWAY,nfsserver:$NFSSERVER,nfspath:$NFSPATH,eth:$ETH,Modifying the kernel CMDLINE The kernel must be recompiled.  \033[0m"
+ifconfig $ETH up
+ifconfig $ETH add $IP netmask $NETMASK
+route add default gw $GATEWAY
+mount -t nfs -o nolock $NFSSERVER:$NFSPATH /root
+exec switch_root -c /dev/console /root /sbin/init

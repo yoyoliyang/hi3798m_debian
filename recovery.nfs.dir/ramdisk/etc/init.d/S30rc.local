@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+#init file for user
+
+start() {
+        # Start daemons.
+        printf "Starting userinit statd: "
+        /sbin/blkid | grep d65960bb-348a-4843-ab21-2d29f9ac70ee > /tmp/mountdev
+        /bin/mount $(cat /tmp/mountdev | cut -d ':' -f 1) -o noatime,nodiratime /opt
+        /bin/sh /opt/init_hi3798m.sh
+        echo "done"
+}
+
+stop() {
+        # Stop daemons.
+        printf "Shutting down userinit mountd: "
+        echo "done"
+
+}
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  *)
+        echo "Usage: userinit {start|stop}"
+        exit 1
+esac
+
+exit 0
+
