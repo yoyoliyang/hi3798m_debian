@@ -1,0 +1,23 @@
+## hi3798m安装docker所需要的内核配置问题
+
+添加apt source:
+deb http://ftp.cn.debian.org/debian jessie-backports main
+apt-get install docker.io
+
+检测docker -d
+root@hi3798m:~# docker -d
+ERRO[0000] 'overlay' not found as a supported filesystem on this host. Please ensure kernel is new enough and has overlay support loaded.
+INFO[0000] +job init_networkdriver()
+INFO[0000] +job serveapi(unix:///var/run/docker.sock)
+INFO[0000] Listening for HTTP on unix (/var/run/docker.sock)
+WARN[0000] Running modprobe bridge nf_nat failed with message: , error: exit status 1 package not installed
+INFO[0000] -job init_networkdriver() = ERR (1)
+FATA[0000] Shutting down daemon due to errors: package not installed
+
+会出现很多错误，主要是因为内核配置问题，具体参照我的github中的kernel_config_docker。
+之后会运行正常：
+![image](https://github.com/yoyoliyang/hi3798m_debian/blob/master/20160918-093246.png)
+
+发现利用这个脚本可以自动检测内核配置是否齐全：
+  $ curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh | /bin/bash /dev/stdin /path/to/.config
+参照这里：https://github.com/umiddelb/armhf/wiki/Installing,-running,-using-docker-on-armhf-(ARMv7)-devices
