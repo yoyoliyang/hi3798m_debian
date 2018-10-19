@@ -1,3 +1,5 @@
+## 这是16年的时候折腾的笔记，现在附加到github，凑合着看吧。
+
 hi3798m_debian 安装install笔记<https://github.com/yoyoliyang/hi3798m_debian/blob/master/hi3798m_install_docker>
 ### hi3798m机顶盒研究初始
 有个网友送了台hi3798m的box板子。带usb3.0。
